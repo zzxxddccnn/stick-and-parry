@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dbojerev1ep5x"]
+
+[ext_resource type="Script" uid="uid://dqcjrga7deewq" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://shgjk34ftbsp" path="res://SPRITES/Idle_right.png" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://ma37o7gap0w2" path="res://SPRITES/idle_back_right.png" id="3_sweqy"]
+[ext_resource type="Texture2D" uid="uid://bn0by0j2biede" path="res://SPRITES/Attack effects.png" id="4_hqtel"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b71w7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("4_hqtel")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("4_hqtel")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("4_hqtel")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("4_hqtel")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("4_hqtel")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("4_hqtel")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kx4ls"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
+}],
+"loop": 0,
+"name": &"Slash",
+"speed": 12.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hqtel"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="PLAYER" type="CharacterBody3D" unique_id=1170042284 node_paths=PackedStringArray("front_sprite", "back_sprite", "attack_sprite", "attack_hitbox") groups=["player"]]
+script = ExtResource("1_4flbx")
+front_sprite = NodePath("Visuals/Front")
+back_sprite = NodePath("Visuals/Back")
+attack_sprite = NodePath("Attack")
+attack_hitbox = NodePath("Hitbox")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=97569867]
+
+[node name="Front" type="Sprite3D" parent="Visuals" unique_id=1911156674]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1, 0)
+cast_shadow = 0
+alpha_cut = 2
+texture = ExtResource("2_hqtel")
+
+[node name="Back" type="Sprite3D" parent="Visuals" unique_id=342415904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+alpha_cut = 2
+texture = ExtResource("3_sweqy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=651590336]
+shape = SubResource("CapsuleShape3D_b71w7")
+
+[node name="Attack" type="AnimatedSprite3D" parent="." unique_id=244953437]
+transform = Transform3D(0.6945929, 3.939231, -1.7218925e-07, 0, -1.7484555e-07, -4, -3.939231, 0.6945929, -3.036162e-08, 0, 0, -1.5)
+sprite_frames = SubResource("SpriteFrames_kx4ls")
+animation = &"Slash"
+frame = 5
+frame_progress = 1.0
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=50614783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1099939557]
+shape = SubResource("BoxShape3D_hqtel")
+debug_fill = false
+
+[connection signal="frame_changed" from="Attack" to="." method="_on_attack_frame_changed"]

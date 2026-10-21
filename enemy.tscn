@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d18x2n34pmmib"]
+
+[ext_resource type="Script" uid="uid://cipggv48hd0rc" path="res://enemy.gd" id="1_7k104"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1nds2"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7k104"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nds2"]
+size = Vector3(1, 2, 1)
+
+[node name="Enemy" type="StaticBody3D" unique_id=1445907596 node_paths=PackedStringArray("mesh") groups=["enemies"]]
+script = ExtResource("1_7k104")
+mesh = NodePath("MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=805446504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_1nds2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=139160307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_7k104")
+mesh = SubResource("BoxMesh_1nds2")

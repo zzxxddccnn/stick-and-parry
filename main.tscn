@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cm5boh1sgw5i"]
+
+[ext_resource type="PackedScene" uid="uid://dbojerev1ep5x" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cl1fchohin6bc" path="res://ground.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dd2nnsrunc374" path="res://camera.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://d18x2n34pmmib" path="res://enemy.tscn" id="4_1bvp3"]
+
+[node name="MAIN" type="Node3D" unique_id=1980225210]
+
+[node name="PLAYER" parent="." unique_id=1170042284 node_paths=PackedStringArray("camera") instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+camera = NodePath("../CAMERA")
+
+[node name="GROUND" parent="." unique_id=130912593 instance=ExtResource("2_h2yge")]
+
+[node name="CAMERA" parent="." unique_id=790975322 instance=ExtResource("3_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 0.6427876, 0.7660444, 0, -0.7660444, 0.6427876, 0, 12, 12)
+fov = 55.3
+near = 0.104
+
+[node name="Enemy" parent="." unique_id=1445907596 instance=ExtResource("4_1bvp3")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1759097201]
+transform = Transform3D(0.8660254, 0.35355338, -0.35355338, 0, 0.70710677, 0.70710677, 0.5, -0.6123724, 0.6123724, 0, 0, 0)
+shadow_enabled = true
